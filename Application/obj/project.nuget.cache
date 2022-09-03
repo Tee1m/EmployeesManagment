@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "39qsjlmsuOxA+xBVcN4gt1tUwHgcqu17N3ahxxtGUrqaxwfb/fUDugb00sm4EvBRCdQ9ObZwUjb23J4YYc73Rg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Macie\\source\\repos\\EmployeesManagment\\Application\\Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Macie\\.nuget\\packages\\mediatr\\10.0.0\\mediatr.10.0.0.nupkg.sha512",
+    "C:\\Users\\Macie\\.nuget\\packages\\mediatr.contracts\\1.0.0\\mediatr.contracts.1.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

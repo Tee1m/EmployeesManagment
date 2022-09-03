@@ -1,0 +1,13 @@
+C:\Users\Macie\source\repos\EmployeesManagment\Application\obj\Debug\netcoreapp3.1\Application.csproj.AssemblyReference.cache
+C:\Users\Macie\source\repos\EmployeesManagment\Application\obj\Debug\netcoreapp3.1\Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Macie\source\repos\EmployeesManagment\Application\obj\Debug\netcoreapp3.1\Application.AssemblyInfoInputs.cache
+C:\Users\Macie\source\repos\EmployeesManagment\Application\obj\Debug\netcoreapp3.1\Application.AssemblyInfo.cs
+C:\Users\Macie\source\repos\EmployeesManagment\Application\obj\Debug\netcoreapp3.1\Application.csproj.CoreCompileInputs.cache
+C:\Users\Macie\source\repos\EmployeesManagment\Application\bin\Debug\netcoreapp3.1\Application.deps.json
+C:\Users\Macie\source\repos\EmployeesManagment\Application\bin\Debug\netcoreapp3.1\Application.dll
+C:\Users\Macie\source\repos\EmployeesManagment\Application\bin\Debug\netcoreapp3.1\Application.pdb
+C:\Users\Macie\source\repos\EmployeesManagment\Application\bin\Debug\netcoreapp3.1\Domain.dll
+C:\Users\Macie\source\repos\EmployeesManagment\Application\bin\Debug\netcoreapp3.1\Domain.pdb
+C:\Users\Macie\source\repos\EmployeesManagment\Application\obj\Debug\netcoreapp3.1\Application.csproj.CopyComplete
+C:\Users\Macie\source\repos\EmployeesManagment\Application\obj\Debug\netcoreapp3.1\Application.dll
+C:\Users\Macie\source\repos\EmployeesManagment\Application\obj\Debug\netcoreapp3.1\Application.pdb
