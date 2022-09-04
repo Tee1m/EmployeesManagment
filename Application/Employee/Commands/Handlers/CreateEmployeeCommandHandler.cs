@@ -13,19 +13,17 @@ namespace Application.Employee.Handlers
     public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, bool>
     {
         private IEmployeesRepository _employeeRepository;
-        private ISqlConnectionFactory _sqlConnectionFactory;
 
-        public CreateEmployeeCommandHandler(IEmployeesRepository employeeRepository, ISqlConnectionFactory sqlConnectionFactory)
+        public CreateEmployeeCommandHandler(IEmployeesRepository employeeRepository)
         {
             _employeeRepository = employeeRepository;
-            _sqlConnectionFactory = sqlConnectionFactory;
         }
 
         async Task<bool> IRequestHandler<CreateEmployeeCommand, bool>.Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
             var employee = new Domain.Employee.Employee(request.FirstName, request.SecondName, request.Age, request.TelephoneNumber);
 
-            if (employee.IsUnique(new EmployeeUniquenessChecker(_sqlConnectionFactory)).IsValid())
+            if (employee.IsUnique(new EmployeeUniquenessChecker(_employeeRepository)).IsValid())
             {
                 await _employeeRepository.Add(employee);
 

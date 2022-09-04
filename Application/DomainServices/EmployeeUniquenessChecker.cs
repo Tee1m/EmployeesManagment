@@ -11,34 +11,37 @@ namespace Application.DomainServices
 {
     internal class EmployeeUniquenessChecker : IEmployeeUniquenessChecker
     {
-        ISqlConnectionFactory _sqlConnectionFactory;
+        IEmployeesRepository _employeesRepository;
 
-        public EmployeeUniquenessChecker(ISqlConnectionFactory sqlConnectionFactory)
+        public EmployeeUniquenessChecker(IEmployeesRepository employeesRepository)
         {
-            this._sqlConnectionFactory = sqlConnectionFactory;
+            this._employeesRepository = employeesRepository;
         }
 
-        public bool IsUnique(string telephoneNumber)
+        public async Task<bool> IsUnique(string telephoneNumber)
         {
-            var connection = _sqlConnectionFactory.GetOpenConnection();
+            //var connection = _sqlConnectionFactory.GetOpenConnection();
 
-            const string sqlQuery = "SELECT TOP 1" +
-                                    "FROM [Employees]" +
-                                    "WHERE [Employees].[TelephoneNumber] = @TelephoneNumber";
+            //const string sqlQuery = "SELECT TOP 1" +
+            //                        "FROM [Employees]" +
+            //                        "WHERE [Employees].[TelephoneNumber] = @TelephoneNumber";
 
-            IDbCommand command = connection.CreateCommand();
+            //IDbCommand command = connection.CreateCommand();
 
-            command.CommandText = sqlQuery;
-            command.CommandType = CommandType.Text;
+            //command.CommandText = sqlQuery;
+            //command.CommandType = CommandType.Text;
 
-            IDbDataParameter param = command.CreateParameter();
-            param.ParameterName = "@TelephoneNumber";
-            param.Value = telephoneNumber;
+            //IDbDataParameter param = command.CreateParameter();
+            //param.ParameterName = "@TelephoneNumber";
+            //param.Value = telephoneNumber;
 
-            command.Parameters.Add(param);
-            int? result = command.ExecuteNonQuery();
+            //command.Parameters.Add(param);
+            //int? result = command.ExecuteNonQuery();
 
-            return !result.HasValue;
+            var employess = await _employeesRepository.GetAll();
+
+            return employess.Where(x => x.TelephoneNumber == telephoneNumber).Any();
+
         }
     }
 }

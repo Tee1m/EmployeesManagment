@@ -19,6 +19,6 @@ namespace Domain.Employee.Rules
             this._telephoneNumber = telephoneNumber;
         }
 
-        public bool IsValid() => _employeeUniquenessChecker.IsUnique(_telephoneNumber);
+        public bool IsValid() => _employeeUniquenessChecker.IsUnique(_telephoneNumber).Result;
     }
 }

@@ -8,6 +8,6 @@ namespace Domain.Employee
 {
     public interface IEmployeeUniquenessChecker
     {
-        bool IsUnique(string telephoneNumber);
+        System.Threading.Tasks.Task<bool> IsUnique(string telephoneNumber);
     }
 }
