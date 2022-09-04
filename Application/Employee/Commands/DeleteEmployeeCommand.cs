@@ -4,6 +4,6 @@ namespace Application.Employee.Commands
 {
     public class DeleteEmployeeCommand : IRequest<bool>
     {
-        public int EmployeeId { get; set; }
+        public int Id { get; set; }
     }
 }

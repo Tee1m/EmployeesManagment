@@ -11,18 +11,18 @@ namespace Domain.Employee
     {
         public string FirstName { get; set; }
         public string SecondName { get; set; }
-        public int Age { get; set; }
-        public string TelephoneNumber { get; set; }
+        public string Email { get; set; }
+        public Role Role { get; set; }
         public List<Task.Task> Tasks { get; set; }
 
         private Employee() { }
 
-        public Employee(string firstName, string secondName, int age, string telephoneNumber)
+        public Employee(string firstName, string secondName, Role role, string email)
         {
             this.FirstName = firstName;
             this.SecondName = secondName;
-            this.Age = age;
-            this.TelephoneNumber = telephoneNumber;
+            this.Role = role;
+            this.Email = email;
             this.Tasks = new List<Task.Task>();
         }
 
@@ -32,6 +32,6 @@ namespace Domain.Employee
         }
 
         public IBusinessRule IsUnique(IEmployeeUniquenessChecker checker)
-            => new EmployeeTelephoneNumberMustBeUniqueRule(checker, TelephoneNumber);
+            => new EmployeeTelephoneNumberMustBeUniqueRule(checker, Email);
     }
 }

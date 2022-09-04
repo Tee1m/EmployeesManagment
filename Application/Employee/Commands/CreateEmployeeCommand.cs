@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Domain.Employee;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,7 @@ namespace Application.Employee.Commands
     {
         public string FirstName { get; set; }
         public string SecondName { get; set; }
-        public int Age { get; set; }
-        public string TelephoneNumber { get; set; }
+        public string Email { get; set; }
+        public Role Role { get; set; }
     }
 }

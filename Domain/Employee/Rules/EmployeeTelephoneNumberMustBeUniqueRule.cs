@@ -9,16 +9,16 @@ namespace Domain.Employee.Rules
     public class EmployeeTelephoneNumberMustBeUniqueRule : IBusinessRule
     {
         private readonly IEmployeeUniquenessChecker _employeeUniquenessChecker;
-        private readonly string _telephoneNumber;
+        private readonly string _email;
 
         public EmployeeTelephoneNumberMustBeUniqueRule(
             IEmployeeUniquenessChecker checker,
-            string telephoneNumber)
+            string email)
         {
             this._employeeUniquenessChecker = checker;
-            this._telephoneNumber = telephoneNumber;
+            this._email = email;
         }
 
-        public bool IsValid() => _employeeUniquenessChecker.IsUnique(_telephoneNumber).Result;
+        public bool IsValid() => _employeeUniquenessChecker.IsUnique(_email).Result;
     }
 }

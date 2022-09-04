@@ -21,7 +21,7 @@ namespace Application.Employee.Handlers
 
         async Task<bool> IRequestHandler<CreateEmployeeCommand, bool>.Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var employee = new Domain.Employee.Employee(request.FirstName, request.SecondName, request.Age, request.TelephoneNumber);
+            var employee = new Domain.Employee.Employee(request.FirstName, request.SecondName, request.Role, request.Email);
 
             if (employee.IsUnique(new EmployeeUniquenessChecker(_employeeRepository)).IsValid())
             {
@@ -47,7 +47,7 @@ namespace Application.Employee.Handlers
         {
             var employess = await _employeeRepository.GetAll() as List<Domain.Employee.Employee>;
 
-            var employeeToDelete = employess.Where(x => x.Id == request.EmployeeId).First();
+            var employeeToDelete = employess.Where(x => x.Id == request.Id).First();
 
             if(employeeToDelete != null)
             {
