@@ -11,7 +11,7 @@ namespace MVC.Models
         public string SecondName { get; set; }
         [Display(Name = "Wiek")]
         public int Age { get; set; }
-        [Display(Name = "nr. telefonu")]
+        [Display(Name = "Telefon")]
         public string TelephoneNumber { get; set; }
     }
 }
