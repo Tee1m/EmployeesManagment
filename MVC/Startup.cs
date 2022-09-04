@@ -1,4 +1,8 @@
+using Application.Employee.Commands;
+using Application.Employee.Queries;
+using Application.Task.Queries;
 using Infrastructure;
+using Infrastructure.DataBase;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,9 +10,11 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MVC.Models.MapperProfiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace MVC
@@ -25,9 +31,18 @@ namespace MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDataBaseServices(Configuration.GetConnectionString("DevConnection"));
+            services.AddMediatRServices();
+
+            var config = new AutoMapper.MapperConfiguration(cfg =>
+                {
+                    cfg.AddProfile(new AutomapperProfile());
+                });
+
+            var mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
+
             services.AddControllersWithViews();
-            services.AddApplicationServices();
-            services.AddMediatR(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,7 +69,7 @@ namespace MVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Employee}/{action=GetAll}/{id?}");
             });
         }
     }

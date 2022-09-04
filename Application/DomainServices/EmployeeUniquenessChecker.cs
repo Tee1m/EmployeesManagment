@@ -1,6 +1,5 @@
 ﻿using Application.Configuration.Data;
 using Domain.Employee;
-using Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;

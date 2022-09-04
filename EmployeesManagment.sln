@@ -7,11 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC", "MVC\MVC.csproj", "{F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{A05B3B41-ECC5-484E-ACEF-898ECF62A50A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{925F663E-A5BD-4F9C-A7B2-EFEEC669EF73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{925F663E-A5BD-4F9C-A7B2-EFEEC669EF73}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D33000BC-BBA9-44FD-8214-F5878088E42A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{7CB87AD6-C47F-43F2-9D40-C55426A0F603}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{7CB87AD6-C47F-43F2-9D40-C55426A0F603}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

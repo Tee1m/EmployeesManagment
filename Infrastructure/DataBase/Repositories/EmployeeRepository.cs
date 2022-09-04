@@ -1,5 +1,4 @@
 ﻿using Domain.Employee;
-using Domain.Repositories;
 using Infrastructure.DataBase;
 using System;
 using System.Collections.Generic;
@@ -8,26 +7,38 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    public class EmployeeRepository : IEmployeeRepository
+    public class EmployeesRepository : IEmployeesRepository
     {
-        private EmployeeContext _employeeContext;
+        private EmployeeDbContext _employeeContext;
 
-        public EmployeeRepository(EmployeeContext context)
+        public EmployeesRepository(EmployeeDbContext context)
         {
             this._employeeContext = context;
         }
 
         public async Task Add(Employee employee)
         {
-            await _employeeContext.AddAsync(employee);
+            await _employeeContext.Employees.AddAsync(employee);
         }
 
         public async Task Update(Employee employee)
         {
             await Task.Run(() =>
             {
-                _employeeContext.Update(employee);
+                _employeeContext.Employees.Update(employee);
             });
+        }
+        public async Task Delete(Employee employee)
+        {
+            await Task.Run(() =>
+            {
+                _employeeContext.Employees.Remove(employee);
+            });
+        }
+
+        public async Task<IEnumerable<Employee>> GetAll()
+        {
+            return _employeeContext.Employees;
         }
     }
 }
