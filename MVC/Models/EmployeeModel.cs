@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domain.Employee;
+using System.ComponentModel.DataAnnotations;
 
 namespace MVC.Models
 {
@@ -9,9 +10,32 @@ namespace MVC.Models
         public string FirstName { get; set; }
         [Display(Name = "Nazwisko")]
         public string SecondName { get; set; }
-        [Display(Name = "Wiek")]
-        public int Age { get; set; }
-        [Display(Name = "Telefon")]
-        public string TelephoneNumber { get; set; }
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+        [Display(Name = "Stanowisko")]
+        public string RoleString {
+            get
+            {
+                switch (EnumRole)
+                {
+                    case Role.Programer:
+                        return "Programista";
+
+                    case Role.ProjectManager:
+                        return "Menedżer projektu";
+
+                    case Role.Qa:
+                        return "QA";
+
+                    default:
+                        return "";
+                }
+            }
+
+            set { } 
+        }
+
+        public Role EnumRole { get; set; }
+
     }
 }

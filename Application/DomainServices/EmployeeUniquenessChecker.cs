@@ -22,7 +22,7 @@ namespace Application.DomainServices
         {
             var employess = await _employeesRepository.GetAll();
 
-            return employess.Where(x => x.Email == email).Any();
+            return !employess.Where(x => x.Email == email).Any();
         }
     }
 }

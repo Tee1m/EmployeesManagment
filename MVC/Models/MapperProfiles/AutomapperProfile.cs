@@ -7,7 +7,12 @@ namespace MVC.Models.MapperProfiles
     {
         public AutomapperProfile()
         {
-            CreateMap<EmployeeModel, EmployeeDTO>().ReverseMap();
+            CreateMap<EmployeeDTO, EmployeeModel>()
+                .ForMember(dest => dest.Id, src => src.MapFrom(value => value.Id))
+                .ForMember(dest => dest.FirstName, src => src.MapFrom(value => value.FirstName))
+                .ForMember(dest => dest.SecondName, src => src.MapFrom(value => value.SecondName))
+                .ForMember(dest => dest.Email, src => src.MapFrom(value => value.Email))
+                .ForMember(dest => dest.EnumRole, src => src.MapFrom(value => value.Role));
         }
     }
 }

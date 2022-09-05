@@ -5,6 +5,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -22,7 +23,7 @@ namespace MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> Index()
         {
             var emloyees = await _mediator.Send(new GetAllEmployeesQuery()) as List<EmployeeDTO>;
             var employeesModel = _mapper.Map<List<EmployeeModel>>(emloyees);
@@ -31,14 +32,14 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] CreateEmployeeCommand employee)
+        public async Task<ActionResult> Add([FromBody] CreateEmployeeCommand employee)
         {
             var result = await _mediator.Send(employee);
 
             if(result)
-                return Ok();
+                return Json(result);
 
-            return BadRequest(result);
+            return Json(result);
         }
     }
 }

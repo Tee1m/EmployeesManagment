@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Employee.Rules
 {
-    public class EmployeeTelephoneNumberMustBeUniqueRule : IBusinessRule
+    public class EmployeeEmailMustBeUniqueRule : IBusinessRule
     {
         private readonly IEmployeeUniquenessChecker _employeeUniquenessChecker;
         private readonly string _email;
 
-        public EmployeeTelephoneNumberMustBeUniqueRule(
+        public EmployeeEmailMustBeUniqueRule(
             IEmployeeUniquenessChecker checker,
             string email)
         {

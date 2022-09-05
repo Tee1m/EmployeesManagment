@@ -1,5 +1,6 @@
 ﻿using Application.Configuration.Data;
 using Application.Employee.Queries.DTOs;
+using Domain.Employee;
 using MediatR;
 using System.Collections.Generic;
 using System.Data;
@@ -41,8 +42,8 @@ namespace Application.Employee.Queries.Handlers
                     Id = reader.GetInt32(reader.GetOrdinal("Id")),
                     FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
                     SecondName = reader.GetString(reader.GetOrdinal("SecondName")),
-                    Age = reader.GetInt32(reader.GetOrdinal("Age")),
-                    TelephoneNumber = reader.GetString(reader.GetOrdinal("TelephoneNumber"))
+                    Email = reader.GetString(reader.GetOrdinal("Email")),
+                    Role = (Role) reader.GetInt32(reader.GetOrdinal("Role"))
                 };
 
                 employees.Add(employeeDTO);

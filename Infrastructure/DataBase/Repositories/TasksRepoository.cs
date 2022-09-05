@@ -18,6 +18,7 @@ namespace Infrastructure.Repositories
         public async System.Threading.Tasks.Task Add(Domain.Task.Task task)
         {
             await _employeeContext.Tasks.AddAsync(task);
+            _employeeContext.SaveChanges();
         }
 
         public async System.Threading.Tasks.Task Update(Domain.Task.Task task)
@@ -25,6 +26,7 @@ namespace Infrastructure.Repositories
             await System.Threading.Tasks.Task.Run(() =>
             {
                 _employeeContext.Tasks.Update(task);
+                _employeeContext.SaveChanges();
             });
         }
 

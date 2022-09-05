@@ -19,6 +19,7 @@ namespace Infrastructure.Repositories
         public async Task Add(Employee employee)
         {
             await _employeeContext.Employees.AddAsync(employee);
+            _employeeContext.SaveChanges();
         }
 
         public async Task Update(Employee employee)
@@ -26,6 +27,7 @@ namespace Infrastructure.Repositories
             await Task.Run(() =>
             {
                 _employeeContext.Employees.Update(employee);
+                _employeeContext.SaveChanges(); 
             });
         }
         public async Task Delete(Employee employee)
@@ -33,6 +35,7 @@ namespace Infrastructure.Repositories
             await Task.Run(() =>
             {
                 _employeeContext.Employees.Remove(employee);
+                _employeeContext.SaveChanges();
             });
         }
 

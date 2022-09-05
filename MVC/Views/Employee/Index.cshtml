@@ -1,0 +1,210 @@
+﻿@model IEnumerable<EmployeeModel>
+
+@{
+    ViewData["Title"] = "Pracownicy";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <button id="employeePopupBTN">Dodaj pracownika</button>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecondName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoleString)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+            <th>
+                Akcja
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.Id)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecondName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleString)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div id="myPopup" class="modal">
+
+<div class="modal-content">    
+
+    <h3>Dodawanie pracownika</h3>
+
+    <form action="">
+
+        <label>Imię </label>
+        <input type="text" id="firstName" placeholder="Imię pracownika" required>
+
+        <label>Nazwisko </label>
+        <input type="text" id="secondName" placeholder="Nazwisko pracownika" required>
+
+        <label>Email </label>
+        <input type="text" id="email" placeholder="Email pracownika" required>
+
+        <label>Stanowisko </label>
+        <select id = "position">
+            <option value=10>Programista</option>
+            <option value=20>QA</option>
+            <option value=30>Menadżer projektu</option>
+        </select>
+        
+        <div class="btnPanel">
+            <input type="submit" class="addEmployeeBTN" value="Dodaj">
+            <input type="button" class="closeBTN" value="Anuluj">
+        </div>
+
+    </form>
+</div>
+
+
+</div>
+
+<style>
+    .modal 
+    {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.4); 
+    }
+
+    .modal-content
+    {
+
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 300px;
+      font-size: 12px;
+      background-color: #FAFAFA;
+    }
+    
+    .modal-content > h3
+    {
+        font-size: 20px !important;
+        padding-bottom: 5px;
+        border-bottom: dashed 1px #D5D5D5;
+    }
+
+    .modal-content > form > .btnPanel
+    {
+        margin-top: 5px;
+        border-top: dashed 1px #D5D5D5;
+        padding-top: 5px;
+    }
+
+    .modal-content > form > input::placeholder
+    {
+        font-style: italic;
+    }
+
+    .modal-content > form > label + input,
+    .modal-content > form > label + select
+    {
+        margin-top: -8px;
+        margin-bottom: 5px;
+        display: block;
+        float: none;
+    }
+
+    .modal-content > form > label + input:invalid
+    {
+        border: 1px dashed red;
+        background-color: #FF9090;
+    }
+</style>
+
+<script>
+    var popup = document.getElementById("myPopup");
+    var btn = document.getElementById("employeePopupBTN");
+    var closeBtn = document.getElementsByClassName("closeBTN")[0];
+    var addEmployeeBtn = document.getElementsByClassName("addEmployeeBTN")[0];
+
+    btn.onclick = () => {
+        popup.style.display = "block";
+    }
+
+    closeBtn.onclick = () => {
+        popup.style.display = "none";
+    }
+
+    addEmployeeBtn.onclick = () => {
+        var data = {
+            FirstName: document.getElementById("firstName").value,
+            SecondName: document.getElementById("secondName").value,
+            Email: document.getElementById("email").value,
+            Role: +document.getElementById("position").value
+        };
+
+        
+
+        setTimeout(addEmployee(data), 500);
+    }
+    
+    function checkArrayHasValues(item, index, arr) {
+        arr[index] != "";
+    }
+    
+    function addEmployee(data) 
+    {
+        var firstName = alert(document.getElementById("firstName").value);
+
+        $.ajax({
+            type: 'POST',
+            url: '/Employee/Add',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (response) {
+                alert(response);
+            },
+            error: function (response) {
+                alert(response);
+            }
+        });
+    }
+
+</script>

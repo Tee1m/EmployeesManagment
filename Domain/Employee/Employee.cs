@@ -32,6 +32,6 @@ namespace Domain.Employee
         }
 
         public IBusinessRule IsUnique(IEmployeeUniquenessChecker checker)
-            => new EmployeeTelephoneNumberMustBeUniqueRule(checker, Email);
+            => new EmployeeEmailMustBeUniqueRule(checker, Email);
     }
 }
