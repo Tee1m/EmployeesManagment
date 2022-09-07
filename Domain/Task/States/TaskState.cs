@@ -2,12 +2,12 @@
 {
     public enum TaskState
     {
-        New = 10,
-        InProgress = 20,
-        ReOpened = 30,
-        ToTest = 40,
-        ToSpecify = 50,
-        Completed = 60,
-        Canceled = 70
+        New = 100,
+        InProgress = 200,
+        ReOpened = 300,
+        ToTest = 400,
+        ToSpecify = 500,
+        Completed = 600,
+        Canceled = 700
     }
 }

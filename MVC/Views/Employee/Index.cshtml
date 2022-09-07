@@ -1,14 +1,17 @@
-﻿@model IEnumerable<EmployeeModel>
+﻿@model IEnumerable<EmployeeViewModel>
 
 @{
     ViewData["Title"] = "Pracownicy";
 }
 
+<link rel="stylesheet" href="~/css/Popup.css" />
+
 <h1>@ViewData["Title"]</h1>
 
-<p>
+<div class="topPanel">
     <button id="employeePopupBTN">Dodaj pracownika</button>
-</p>
+    <button id="taskPopupBTN">Dodaj zadanie</button>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -61,114 +64,98 @@
     </tbody>
 </table>
 
-<div id="myPopup" class="modal">
+<div id="myPopupEmployee" class="popup">
 
-<div class="modal-content">    
+    <div class="popup-content">    
 
-    <h3>Dodawanie pracownika</h3>
+        <h3>Dodawanie pracownika</h3>
 
-    <form action="">
+        <form id="empoyeePopup" action="">
 
-        <label>Imię </label>
-        <input type="text" id="firstName" placeholder="Imię pracownika" required>
+            <label>Imię </label>
+            <input type="text" id="firstName" placeholder="Imię pracownika">
 
-        <label>Nazwisko </label>
-        <input type="text" id="secondName" placeholder="Nazwisko pracownika" required>
+            <label>Nazwisko </label>
+            <input type="text" id="secondName" placeholder="Nazwisko pracownika">
 
-        <label>Email </label>
-        <input type="text" id="email" placeholder="Email pracownika" required>
+            <label>Email </label>
+            <input type="text" id="email" placeholder="Email pracownika">
 
-        <label>Stanowisko </label>
-        <select id = "position">
-            <option value=10>Programista</option>
-            <option value=20>QA</option>
-            <option value=30>Menadżer projektu</option>
-        </select>
+            <label>Stanowisko </label>
+            <select id = "position">
+                <option value=10>Programista</option>
+                <option value=20>QA</option>
+                <option value=30>Menadżer projektu</option>
+            </select>
         
-        <div class="btnPanel">
-            <input type="submit" class="addEmployeeBTN" value="Dodaj">
-            <input type="button" class="closeBTN" value="Anuluj">
-        </div>
+            <div class="btnPanel">
+                <input type="submit" class="addEmployeeBTN" value="Dodaj">
+                <input type="button" class="closeEmployeeBTN" value="Anuluj">
+            </div>
 
-    </form>
+        </form>
+    </div>
+
 </div>
 
+<div id="myPopupTask" class="popup">
+
+    <div class="popup-content" id="popupTaskWindow">    
+
+        <h3>Dodawanie zadania</h3>
+
+        <form id="taskPopup" action="">
+
+            <label>Nazwa zadania </label>
+            <input type="text" id="taskName" placeholder="Nazwa zadania">
+
+            <label>Opis</label>
+            <textarea type="text" id="taskDescription" placeholder="Opis zadania"></textarea>
+
+            <label>Data wykonania zadania</label>
+            <input type="date" id="taskFinishDate">
+
+            <label>Status </label>
+            <select id = "taskState">
+                <option value=100>Nowy</option>
+                <option value=200>W realizacji</option>
+                <option value=300>Przywrócony</option>
+                <option value=400>W testach</option>
+                <option value=500>Do wyjaśnienia</option>
+                <option value=600>Zakończony</option>
+                <option value=700>Wycofany</option>
+            </select>
+
+            <label>Pracownik</label>
+            <select id="taskEmployeeList">
+
+            </select>
+        
+            <div class="btnPanel">
+                <input type="submit" class="addTaskBTN" value="Dodaj">
+                <input type="button" class="closeTaskBTN" value="Anuluj">
+            </div>
+
+        </form>
+    </div>
 
 </div>
-
-<style>
-    .modal 
-    {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgb(0,0,0);
-      background-color: rgba(0,0,0,0.4); 
-    }
-
-    .modal-content
-    {
-
-      margin: 15% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 300px;
-      font-size: 12px;
-      background-color: #FAFAFA;
-    }
-    
-    .modal-content > h3
-    {
-        font-size: 20px !important;
-        padding-bottom: 5px;
-        border-bottom: dashed 1px #D5D5D5;
-    }
-
-    .modal-content > form > .btnPanel
-    {
-        margin-top: 5px;
-        border-top: dashed 1px #D5D5D5;
-        padding-top: 5px;
-    }
-
-    .modal-content > form > input::placeholder
-    {
-        font-style: italic;
-    }
-
-    .modal-content > form > label + input,
-    .modal-content > form > label + select
-    {
-        margin-top: -8px;
-        margin-bottom: 5px;
-        display: block;
-        float: none;
-    }
-
-    .modal-content > form > label + input:invalid
-    {
-        border: 1px dashed red;
-        background-color: #FF9090;
-    }
-</style>
 
 <script>
-    var popup = document.getElementById("myPopup");
-    var btn = document.getElementById("employeePopupBTN");
-    var closeBtn = document.getElementsByClassName("closeBTN")[0];
+
+    //Employee popup js
+
+    var popupEmployee = document.getElementById("myPopupEmployee");
+    var btnEmployee = document.getElementById("employeePopupBTN");
+    var closeEmployeeBtn = document.getElementsByClassName("closeEmployeeBTN")[0];
     var addEmployeeBtn = document.getElementsByClassName("addEmployeeBTN")[0];
 
-    btn.onclick = () => {
-        popup.style.display = "block";
+    btnEmployee.onclick = () => {
+        popupEmployee.style.display = "block";
     }
 
-    closeBtn.onclick = () => {
-        popup.style.display = "none";
+    closeEmployeeBtn.onclick = () => {
+        popupEmployee.style.display = "none";
     }
 
     addEmployeeBtn.onclick = () => {
@@ -179,32 +166,101 @@
             Role: +document.getElementById("position").value
         };
 
-        
-
-        setTimeout(addEmployee(data), 500);
-    }
-    
-    function checkArrayHasValues(item, index, arr) {
-        arr[index] != "";
-    }
-    
-    function addEmployee(data) 
-    {
-        var firstName = alert(document.getElementById("firstName").value);
-
         $.ajax({
+            async: false,
             type: 'POST',
             url: '/Employee/Add',
             data: JSON.stringify(data),
             contentType: 'application/json',
             dataType: 'json',
             success: function (response) {
-                alert(response);
+                if (response) {
+                    alert("Dodano pracownika");
+                }
+                else {
+                    alert("Nie dodano pracownika");
+                }
+                ;
             },
             error: function (response) {
-                alert(response);
+                alert(response.responseText);
             }
         });
+    }
+    
+    //Task popup js
+
+    var popupTask = document.getElementById("myPopupTask");
+    var btnTask = document.getElementById("taskPopupBTN");
+    var closeTaskBtn = document.getElementsByClassName("closeTaskBTN")[0];
+    var addTaskBtn = document.getElementsByClassName("addTaskBTN")[0];
+
+    btnTask.onclick = () => {
+        popupTask.style.display = "block";
+
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: '/Employee/GetAllIdsWithFullName',
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (response) {
+                var employeesList = CreateEmployeeTaskList(JSON.parse(response));
+                document.getElementById("taskEmployeeList").innerHTML = employeesList;
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+
+    closeTaskBtn.onclick = () => {
+        popupTask.style.display = "none";
+    }
+
+    function CreateEmployeeTaskList(employeeList) 
+    {
+        var content = "";
+
+        for (i = 0; i < employeeList.length; i++) 
+        {
+            content += '<option value = "' + employeeList[i].Id + '">' + employeeList[i].FullName + '</option>';
+        }
+        
+        return content;
+    }
+
+    addTaskBtn.onclick = () => {
+        
+        alert(document.getElementById("taskFinishDate").value);
+
+        var data = {
+              Title: document.getElementById("taskName").value,
+              Description: document.getElementById("taskDescription").value,
+              FinallDate: new Date(document.getElementById("taskFinishDate").value).toISOString(),
+              EmployeeId: +document.getElementById("taskEmployeeList").value,
+              TaskState: +document.getElementById("taskState").value
+        };
+
+        alert(new Date(document.getElementById("taskFinishDate").value).toISOString());
+
+        $.ajax({
+            async: false,
+            type: 'POST',
+            url: '/Task/Add',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (response) {
+                if (response) {
+                    alert("done");
+                }
+            },
+            error: function(response) {
+                alert(response.responseText);
+            }
+        });
+
     }
 
 </script>

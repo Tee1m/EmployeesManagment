@@ -15,7 +15,10 @@ namespace Domain.Employee
         public Role Role { get; set; }
         public List<Task.Task> Tasks { get; set; }
 
-        private Employee() { }
+        private Employee() 
+        {
+            this.Tasks = new List<Task.Task>();
+        }
 
         public Employee(string firstName, string secondName, Role role, string email)
         {

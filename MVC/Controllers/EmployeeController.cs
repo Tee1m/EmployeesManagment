@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using MVC.Models;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace MVC.Controllers
@@ -22,24 +23,32 @@ namespace MVC.Controllers
             this._mapper = mapper;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] CreateEmployeeCommand employee)
+        {
+            var result = await _mediator.Send(employee);
+
+            return Json(result);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var emloyees = await _mediator.Send(new GetAllEmployeesQuery()) as List<EmployeeDTO>;
-            var employeesModel = _mapper.Map<List<EmployeeModel>>(emloyees);
+            var employeesModel = _mapper.Map<List<EmployeeViewModel>>(emloyees);
 
             return View(employeesModel);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Add([FromBody] CreateEmployeeCommand employee)
+        [HttpGet]
+        public async Task<IActionResult> GetAllIdsWithFullName()
         {
-            var result = await _mediator.Send(employee);
+            var employees = await _mediator.Send(new GetAllEmployeesQuery()) as List<EmployeeDTO>;
+            var employeesIdWithFullNameModal = _mapper.Map<List<EmployeeIdWithFullnameViewModel>>(employees);
 
-            if(result)
-                return Json(result);
+            string jsonResponse = JsonSerializer.Serialize(employeesIdWithFullNameModal);
 
-            return Json(result);
+            return Json(jsonResponse);
         }
     }
 }

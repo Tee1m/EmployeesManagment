@@ -21,7 +21,7 @@ namespace Application.Configuration.Commands.Handlers
             var employees = await _employeeRepository.GetAll();
             var employee = employees.Where(x => x.Id == request.EmployeeId).First();
 
-            var task = new Domain.Task.Task(request.Title, request.Content, request.TaskState);
+            var task = new Domain.Task.Task(request.Title, request.Description, request.State);
             employee.AddTask(task);
 
             await _employeeRepository.Update(employee);

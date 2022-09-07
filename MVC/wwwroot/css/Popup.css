@@ -1,0 +1,69 @@
+﻿#popupTaskWindow {
+    width: 500px;
+}
+
+#taskDescription {
+    width: 460px;
+    height: 200px;
+}
+
+.topPanel {
+    padding: 20px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.popup-content {
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    font-size: 12px;
+    background-color: #FAFAFA;
+}
+
+    .popup-content > h3 {
+        font-size: 20px !important;
+        padding-bottom: 5px;
+        border-bottom: dashed 1px #D5D5D5;
+    }
+
+    .popup-content > form > .btnPanel {
+        margin-top: 5px;
+        border-top: dashed 1px #D5D5D5;
+        padding-top: 5px;
+    }
+
+    .popup-content > form > input::placeholder,
+    .popup-content > form > textarea::placeholder {
+        font-style: italic;
+    }
+
+    .popup-content > form > label + input,
+    .popup-content > form > label + select,
+    .popup-content > form > label + textarea {
+        margin-top: -8px;
+        margin-bottom: 5px;
+        display: block;
+        float: none;
+    }
+
+    .modal-content > form > label + textarea {
+        width: 260px;
+    }
+
+    .modal-content > form > label + input:invalid {
+        border: 1px dashed red;
+        background-color: #FF9090;
+    }
