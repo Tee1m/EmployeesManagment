@@ -6,9 +6,9 @@ using System;
 
 namespace MVC.Models.MapperProfiles
 {
-    public class AutomapperProfile : Profile
+    public class EmployeeViewModelProfile : Profile
     {
-        public AutomapperProfile()
+        public EmployeeViewModelProfile()
         {
             CreateMap<EmployeeDTO, EmployeeViewModel>()
                 .ForMember(dest => dest.Id, src => src.MapFrom(value => value.Id))
@@ -17,9 +17,7 @@ namespace MVC.Models.MapperProfiles
                 .ForMember(dest => dest.Email, src => src.MapFrom(value => value.Email))
                 .ForMember(dest => dest.EnumRole, src => src.MapFrom(value => value.Role));
 
-            CreateMap<EmployeeDTO, EmployeeIdWithFullnameViewModel>()
-                .ForMember(dest => dest.Id, src => src.MapFrom(value => value.Id))
-                .ForMember(dest => dest.FullName, src => src.MapFrom(value => value.FirstName + " " + value.SecondName));
+
 
             CreateMap<CreateTaskRequest, CreateTaskCommand>()
                 .ForMember(dest => dest.Title, src => src.MapFrom(value => value.Title))

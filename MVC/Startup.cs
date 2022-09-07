@@ -1,6 +1,7 @@
 using Application.Employee.Commands;
 using Application.Employee.Queries;
 using Application.Task.Queries;
+using AutoMapper;
 using Infrastructure;
 using Infrastructure.DataBase;
 using MediatR;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MVC.Models.Mapper;
 using MVC.Models.MapperProfiles;
 using System;
 using System.Collections.Generic;
@@ -21,26 +23,29 @@ namespace MVC
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+        readonly Assembly[] _assembly;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            _assembly = AppDomain.CurrentDomain.GetAssemblies();
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDataBaseServices(Configuration.GetConnectionString("DevConnection"));
             services.AddMediatRServices();
+            services.AddAutoMapperServices(_assembly);
 
-            var config = new AutoMapper.MapperConfiguration(cfg =>
-                {
-                    cfg.AddProfile(new AutomapperProfile());
-                });
+            //var config = new AutoMapper.MapperConfiguration(cfg =>
+            //    {
+            //        cfg.AddProfile(new EmployeeViewModelProfile());
+            //    });
 
-            var mapper = config.CreateMapper();
-            services.AddSingleton(mapper);
+            //var mapper = config.CreateMapper();
+            //services.AddSingleton(mapper);
 
             services.AddControllersWithViews();
         }
