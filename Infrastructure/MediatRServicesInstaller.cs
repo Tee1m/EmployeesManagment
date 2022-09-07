@@ -8,12 +8,13 @@ using MediatR;
 using Application.Task.Queries;
 using Application.Employee.Commands;
 using Application.Configuration.Commands;
+using System.Linq;
 
 namespace Infrastructure
 {
     public static class MediatRServicesInstaller
     {
-        public static IServiceCollection AddMediatRServices(this IServiceCollection services)
+        public static IServiceCollection AddMediatRServices(this IServiceCollection services, Assembly[] assemblies)
         {
             services.AddMediatR(typeof(GetAllEmployeesQuery).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(GetAllTasksQuery).GetTypeInfo().Assembly);

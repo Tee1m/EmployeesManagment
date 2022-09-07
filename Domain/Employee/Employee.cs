@@ -9,10 +9,10 @@ namespace Domain.Employee
 {
     public class Employee : BaseEntity
     {
-        public string FirstName { get; set; }
-        public string SecondName { get; set; }
-        public string Email { get; set; }
-        public Role Role { get; set; }
+        public string FirstName { get; private set; }
+        public string SecondName { get; private set; }
+        public string Email { get; private set; }
+        public Role Role { get; private set; }
         public List<Task.Task> Tasks { get; set; }
 
         private Employee() 

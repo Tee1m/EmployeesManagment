@@ -231,9 +231,6 @@
     }
 
     addTaskBtn.onclick = () => {
-        
-        alert(document.getElementById("taskFinishDate").value);
-
         var data = {
               Title: document.getElementById("taskName").value,
               Description: document.getElementById("taskDescription").value,
@@ -241,8 +238,6 @@
               EmployeeId: +document.getElementById("taskEmployeeList").value,
               TaskState: +document.getElementById("taskState").value
         };
-
-        alert(new Date(document.getElementById("taskFinishDate").value).toISOString());
 
         $.ajax({
             async: false,
@@ -253,7 +248,7 @@
             dataType: 'json',
             success: function (response) {
                 if (response) {
-                    alert("done");
+                    alert(response);
                 }
             },
             error: function(response) {

@@ -9,12 +9,12 @@ namespace Domain.Task
 {
     public class Task : BaseEntity
     {
-        public string Title { get; set; }
-        public string Content { get; set; }
-        public TaskState CurrentState { get; set; }
-        public DateTime? FinishDate { get; set; }
+        public string Title { get; private set; }
+        public string Content { get; private set; }
+        public TaskState CurrentState { get; private set; }
+        public DateTime? FinishDate { get; private set; }
 
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; private set; }
 
         private Task()
         {

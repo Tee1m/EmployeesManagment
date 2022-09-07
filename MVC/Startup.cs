@@ -24,20 +24,20 @@ namespace MVC
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        readonly Assembly[] _assembly;
+        readonly Assembly[] _assemblies;
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _assembly = AppDomain.CurrentDomain.GetAssemblies();
+            _assemblies = AppDomain.CurrentDomain.GetAssemblies();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDataBaseServices(Configuration.GetConnectionString("DevConnection"));
-            services.AddMediatRServices();
-            services.AddAutoMapperServices(_assembly);
+            services.AddMediatRServices(_assemblies);
+            services.AddAutoMapperServices(_assemblies);
 
             //var config = new AutoMapper.MapperConfiguration(cfg =>
             //    {

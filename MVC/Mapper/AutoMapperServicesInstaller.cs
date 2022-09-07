@@ -8,9 +8,9 @@ namespace MVC.Models.Mapper
 {
     public static class AutoMapperServicesInstaller
     {
-        public static IServiceCollection AddAutoMapperServices(this IServiceCollection services, Assembly[] assembly)
+        public static IServiceCollection AddAutoMapperServices(this IServiceCollection services, Assembly[] assemblies)
         {
-            var autoMapperProfileTypes = assembly.SelectMany(a => a.GetTypes()
+            var autoMapperProfileTypes = assemblies.SelectMany(a => a.GetTypes()
                 .Where(p => typeof(Profile).IsAssignableFrom(p) && p.IsPublic && !p.IsAbstract));
 
             services.AddScoped<IMapper>(context => new MapperConfiguration(config =>
