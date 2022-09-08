@@ -14,13 +14,9 @@ namespace Infrastructure
 {
     public static class MediatRServicesInstaller
     {
-        public static IServiceCollection AddMediatRServices(this IServiceCollection services, Assembly[] assemblies)
+        public static IServiceCollection AddMediatRServices(this IServiceCollection services)
         {
-            services.AddMediatR(typeof(GetAllEmployeesQuery).GetTypeInfo().Assembly);
-            services.AddMediatR(typeof(GetAllTasksQuery).GetTypeInfo().Assembly);
-            services.AddMediatR(typeof(CreateEmployeeCommand).GetTypeInfo().Assembly);
-            services.AddMediatR(typeof(DeleteEmployeeCommand).GetTypeInfo().Assembly);
-            services.AddMediatR(typeof(CreateTaskCommand).GetTypeInfo().Assembly);
+                services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
             return services;
         }
