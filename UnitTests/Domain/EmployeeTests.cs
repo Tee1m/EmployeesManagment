@@ -59,7 +59,7 @@ namespace UnitTests.Domain
         }
 
         [Theory]
-        [InlineData("Takie Imie", null,  Role.Programer, "wp@wp.pl")]
+        [InlineData("Takie Imie", null,  Role.Programer, "wp@p.pl")]
         [InlineData(null, "Takie nazwisko", Role.Qa, "wp@12wp.pl")]
         [InlineData("Takie Imie", "Takie nazwisko", null, "wp@12wp.pl")]
         [InlineData("Takie Imie", "Takie nazwisko", Role.ProjectManager, null)]
