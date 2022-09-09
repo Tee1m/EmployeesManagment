@@ -1,4 +1,5 @@
-﻿using Domain.Employee;
+﻿using Application.Employee.Commands.Results;
+using Domain.Employee;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace Application.Employee.Commands
 {
-    public class CreateEmployeeCommand : IRequest<bool>
+    public class CreateEmployeeCommand : IRequest<CreateEmployeeResult>
     {
         public string FirstName { get; set; }
         public string SecondName { get; set; }

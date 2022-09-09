@@ -20,13 +20,20 @@ namespace Domain.Employee
             this.Tasks = new List<Task.Task>();
         }
 
-        public Employee(string firstName, string secondName, Role role, string email)
+        private Employee(string firstName, string secondName, Role role, string email)
         {
             this.FirstName = firstName;
             this.SecondName = secondName;
             this.Role = role;
             this.Email = email;
             this.Tasks = new List<Task.Task>();
+        }
+
+        public static Employee Create(string firstName, string secondName, Role role, string email, IEmployeeUniquenessChecker checker)
+        {
+            CheckRule(new EmployeeEmailMustBeUniqueRule(checker, email));
+
+            return new Employee(firstName, secondName, role, email);
         }
 
         public void AddTask(Task.Task task)

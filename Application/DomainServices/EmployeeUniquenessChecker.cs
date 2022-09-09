@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.DomainServices
 {
-    internal class EmployeeUniquenessChecker : IEmployeeUniquenessChecker
+    public class EmployeeUniquenessChecker : IEmployeeUniquenessChecker
     {
         IEmployeesRepository _employeesRepository;
 
@@ -22,7 +22,7 @@ namespace Application.DomainServices
         {
             var employess = await _employeesRepository.GetAll();
 
-            return !employess.Where(x => x.Email == email).Any();
+            return employess.Where(x => x.Email == email).Any();
         }
     }
 }

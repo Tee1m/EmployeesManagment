@@ -8,6 +8,8 @@ namespace Domain
 {
     public interface IBusinessRule
     {
-        bool IsValid();
+        string Message { get; }
+
+        bool IsBroken();
     }
 }

@@ -10,6 +10,7 @@ namespace Domain.Employee.Rules
     {
         private readonly IEmployeeUniquenessChecker _employeeUniquenessChecker;
         private readonly string _email;
+        
 
         public EmployeeEmailMustBeUniqueRule(
             IEmployeeUniquenessChecker checker,
@@ -19,6 +20,8 @@ namespace Domain.Employee.Rules
             this._email = email;
         }
 
-        public bool IsValid() => _employeeUniquenessChecker.IsUnique(_email).Result;
+        public string Message => "Podany adres e-mail nie jest unikalny";
+
+        public bool IsBroken() => _employeeUniquenessChecker.IsUnique(_email).Result;
     }
 }

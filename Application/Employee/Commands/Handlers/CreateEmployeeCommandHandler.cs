@@ -5,30 +5,33 @@ using Domain.Employee;
 using Application.DomainServices;
 using Application.Configuration.Data;
 using Application.Employee.Commands;
+using Application.Employee.Commands.Results;
 
 namespace Application.Employee.Handlers
 {
-    public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, bool>
+    public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, CreateEmployeeResult>
     {
-        private IEmployeesRepository _employeeRepository;
+        private readonly IEmployeesRepository _employeeRepository;
+        private readonly IEmployeeUniquenessChecker _checker;
 
-        public CreateEmployeeCommandHandler(IEmployeesRepository employeeRepository)
+        public CreateEmployeeCommandHandler(IEmployeesRepository employeeRepository, IEmployeeUniquenessChecker checker)
         {
-            _employeeRepository = employeeRepository;
+            this._employeeRepository = employeeRepository;
+            this._checker = checker;
         }
 
-        async Task<bool> IRequestHandler<CreateEmployeeCommand, bool>.Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
+        async Task<CreateEmployeeResult> IRequestHandler<CreateEmployeeCommand, CreateEmployeeResult>.Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var employee = new Domain.Employee.Employee(request.FirstName, request.SecondName, request.Role, request.Email);
+            var employee = Domain.Employee.Employee.Create(request.FirstName, request.SecondName, request.Role, request.Email, _checker);
 
-            if (employee.IsUnique(new EmployeeUniquenessChecker(_employeeRepository)).IsValid())
-            {
-                await _employeeRepository.Add(employee);
+            await _employeeRepository.Add(employee);
 
-                return true;
-            }
+            var result = new CreateEmployeeResult();
+            result.FullName = employee.FirstName + " " + employee.SecondName;
+            result.Email = employee.Email;
+            result.Role = employee.Role;
 
-            return false;
+            return result;
         }
     }
 }
