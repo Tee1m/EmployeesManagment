@@ -1,4 +1,4 @@
-﻿using Domain.Task.States;
+﻿using Domain.Task.State;
 
 namespace MVC.Controllers.Requests
 {

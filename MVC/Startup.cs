@@ -2,8 +2,8 @@ using Application.Employee.Commands;
 using Application.Employee.Queries;
 using Application.Task.Queries;
 using AutoMapper;
-using Infrastructure;
 using Infrastructure.DataBase;
+using Infrastructure.ServicesInstallers;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,17 +36,9 @@ namespace MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDataBaseServices(Configuration.GetConnectionString("DevConnection"));
-            services.AddMediatRServices(_assemblies);
+            services.AddDomainServices();
+            services.AddMediatRServices();
             services.AddAutoMapperServices(_assemblies);
-
-            //var config = new AutoMapper.MapperConfiguration(cfg =>
-            //    {
-            //        cfg.AddProfile(new EmployeeViewModelProfile());
-            //    });
-
-            //var mapper = config.CreateMapper();
-            //services.AddSingleton(mapper);
-
             services.AddControllersWithViews();
         }
 

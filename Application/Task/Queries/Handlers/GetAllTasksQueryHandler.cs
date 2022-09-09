@@ -1,6 +1,6 @@
 ﻿using Application.Configuration.Data;
 using Application.Task.DTOs;
-using Domain.Task.States;
+using Domain.Task.State;
 using MediatR;
 using System;
 using System.Collections.Generic;

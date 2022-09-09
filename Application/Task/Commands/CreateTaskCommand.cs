@@ -1,10 +1,11 @@
-﻿using Domain.Task.States;
+﻿using Application.Task.Commands.Results;
+using Domain.Task.State;
 using MediatR;
 using System;
 
 namespace Application.Configuration.Commands
 {
-    public class CreateTaskCommand : IRequest<bool>
+    public class CreateTaskCommand : IRequest<CreateTaskResult>
     {
         public string Title { get; set; }
         public string Description { get; set; }

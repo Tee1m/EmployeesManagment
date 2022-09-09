@@ -1,4 +1,4 @@
-﻿using Domain.Task.States;
+﻿using Domain.Task.State;
 using System;
 
 namespace Application.Task.DTOs

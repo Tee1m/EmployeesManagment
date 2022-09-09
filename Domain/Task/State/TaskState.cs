@@ -1,4 +1,4 @@
-﻿namespace Domain.Task.States
+﻿namespace Domain.Task.State
 {
     public enum TaskState
     {

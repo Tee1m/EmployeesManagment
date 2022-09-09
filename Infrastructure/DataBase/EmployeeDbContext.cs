@@ -1,5 +1,4 @@
 ﻿using Domain.Employee;
-using Infrastructure.DataBase.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

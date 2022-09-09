@@ -26,9 +26,9 @@ namespace MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CreateEmployeeCommand employee)
         {
-            var result = await _mediator.Send(employee);
+            var response = await _mediator.Send(employee);
 
-            return Json(result);
+            return Json(response);
         }
 
         [HttpGet]
