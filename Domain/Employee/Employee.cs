@@ -32,8 +32,9 @@ namespace Domain.Employee
         public static Employee Create(string firstName, string secondName, Role role, string email, IEmployeeUniquenessChecker checker)
         {
             CheckRule(new EmployeeMustHaveAllValuesRule(firstName, secondName, email, role));
+            CheckRule(new EmployeeEmailMustBeValidFormatRule(email));
             CheckRule(new EmployeeEmailMustBeUniqueRule(checker, email));
-
+            
             return new Employee(firstName, secondName, role, email);
         }
 
