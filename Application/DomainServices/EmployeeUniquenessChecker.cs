@@ -1,5 +1,6 @@
 ﻿using Application.Configuration.Data;
 using Domain.Employee;
+using Domain.Employee.Abstraction;
 using System;
 using System.Collections.Generic;
 using System.Data;

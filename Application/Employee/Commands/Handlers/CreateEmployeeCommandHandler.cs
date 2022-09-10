@@ -6,6 +6,7 @@ using Application.DomainServices;
 using Application.Configuration.Data;
 using Application.Employee.Commands;
 using Application.Employee.Commands.Results;
+using Domain.Employee.Abstraction;
 
 namespace Application.Employee.Handlers
 {

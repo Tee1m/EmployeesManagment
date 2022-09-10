@@ -1,4 +1,5 @@
-﻿using Domain.Employee.Rules;
+﻿using Domain.Employee.Abstraction;
+using Domain.Employee.Rules;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -2,8 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Domain.Employee;
 using Application.DomainServices;
+using Domain.Employee.Abstraction;
 
 namespace Infrastructure.ServicesInstallers
 {

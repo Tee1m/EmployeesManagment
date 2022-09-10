@@ -24,9 +24,9 @@ namespace Domain.Employee.Rules
 
         public bool IsBroken()
         {
-            return _firstName == null ||
-                   _secondName == null ||
-                   _email == null ||
+            return _firstName == null || _firstName == "" ||
+                   _secondName == null || _secondName == "" ||
+                   _email == null || _email == "" ||
                    !Enum.IsDefined(_role.GetType(), _role);
         }
     }

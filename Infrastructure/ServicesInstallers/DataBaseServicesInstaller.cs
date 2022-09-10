@@ -1,6 +1,6 @@
 ﻿using Application.Configuration.Data;
 using Domain.Employee;
-using Domain.Task;
+using Domain.Task.Abstraction;
 using Infrastructure.DataBase;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;

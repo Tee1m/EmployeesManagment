@@ -1,4 +1,5 @@
-﻿using Domain.Task.State;
+﻿using Domain.Task.Rules;
+using Domain.Task.State;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Domain.Task
         public TaskState CurrentState { get; private set; }
         public DateTime? FinishDate { get; private set; }
         public DateTime CreatedDate { get; private set; }
+
         readonly private List<StateTransition> stateTransitions = new List<StateTransition>()
         {
             new StateTransition(TaskState.New, TaskState.InProgress),
@@ -38,6 +40,8 @@ namespace Domain.Task
 
         private Task(string title, string content, TaskState taskState)
         {
+            CheckRule(new TaskMustHaveAllValues(title, content, taskState));
+
             this.Title = title;
             this.Content = content;
             this.CurrentState = taskState;
@@ -51,7 +55,7 @@ namespace Domain.Task
             return task;
         }
 
-        public IEnumerable<TaskState> NextAcceptStates()
+        public IEnumerable<TaskState> GetNextStates()
         {
             return stateTransitions.Where(c => c.Current == CurrentState).Select(n => n.Next);
         }
